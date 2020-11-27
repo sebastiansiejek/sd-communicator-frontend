@@ -1,29 +1,34 @@
-import React, { useState, useEffect } from 'react'
-import socketIOClient from 'socket.io-client'
+import React from 'react'
+import useChat from '../../hooks/useChat'
 import { useForm } from 'react-hook-form'
 
 type Inputs = {
   message: string
 }
 
-const Chat = () => {
+const Chat: React.FC = () => {
   const { handleSubmit, register, reset } = useForm<Inputs>()
-  const [messages, setMessage] = useState<Array<string>>([])
-
-  const socket = socketIOClient(process.env.REACT_APP_SOCKETIO_SERVER_URL)
-
-  useEffect(() => {
-    socket.on('msgToClient', (message: string) => {
-      setMessage([...messages, message])
-    })
-  })
+  const { messages, sendMessage } = useChat('test')
 
   return (
     <>
-      {messages.length > 0 && messages.map((message, key) => <li key={message + key}>{message}</li>)}
+      <h2>chat</h2>
+      {messages.length > 0 &&
+        messages.map((message, key) => {
+          return (
+            <li
+              style={{
+                paddingLeft: !message.ownedByCurrentUser ? '20px' : 0,
+              }}
+              key={message.body + key}
+            >
+              {message.body}
+            </li>
+          )
+        })}
       <form
         onSubmit={handleSubmit((data: Inputs) => {
-          socket.emit('msgToServer', data.message)
+          sendMessage(data.message)
           reset({
             message: '',
           })
