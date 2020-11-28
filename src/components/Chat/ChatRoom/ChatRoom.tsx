@@ -1,8 +1,10 @@
+import Input from 'components/atoms/Input'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, connect } from 'react-redux'
 import { setRoomId } from 'store/slices/userSlice'
 import { IStore } from 'store/store'
+import styled from 'styled-components'
 
 interface Props {
   roomId?: string
@@ -12,6 +14,10 @@ interface IInputs {
   room_id: string
 }
 
+const ChatRoomFormStyled = styled.form`
+  display: flex;
+`
+
 const ChatRoom: React.FC<Props> = ({ roomId }) => {
   const { handleSubmit, register, reset } = useForm()
   const dispatch = useDispatch()
@@ -19,7 +25,7 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
   return (
     <>
       {!roomId && (
-        <form
+        <ChatRoomFormStyled
           onSubmit={handleSubmit(({ room_id }: IInputs) => {
             dispatch(setRoomId(room_id))
             reset({
@@ -27,7 +33,7 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
             })
           })}
         >
-          <input
+          <Input
             name="room_id"
             type="text"
             ref={register}
@@ -35,7 +41,7 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
             required
           />
           <button type="submit">Join/create</button>
-        </form>
+        </ChatRoomFormStyled>
       )}
       {roomId && (
         <p>
