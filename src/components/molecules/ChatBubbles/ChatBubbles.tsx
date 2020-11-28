@@ -11,8 +11,10 @@ const ChatBubblesStyles = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 40rem;
+  width: 100%;
   padding: 1rem;
   background: ${({ theme }) => theme.colors.black[700]};
+  border-radius: ${({ theme }) => theme.radius.small};
 
   > *:not(:last-child) {
     margin-bottom: 0.8rem;

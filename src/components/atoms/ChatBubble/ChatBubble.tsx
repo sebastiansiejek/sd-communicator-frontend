@@ -7,7 +7,7 @@ type IProps = {
 
 const ChatBubbleStyled = styled.div<IProps>`
   padding: 1rem 1.2rem;
-  border-radius: 1rem;
+  border-radius: ${({ theme }) => theme.radius.normal};
   width: max-content;
   max-width: 90%;
 

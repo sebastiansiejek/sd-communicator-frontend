@@ -3,6 +3,7 @@ import { normalize } from 'styled-normalize'
 
 const GlobalStyles = createGlobalStyle`
   ${normalize}
+  @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600&display=swap');
 
   *, *::before, *::after {
     box-sizing: border-box;
@@ -13,6 +14,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    font-family: 'Epilogue', sans-serif;
     font-size: 1.6rem;
   }
 `

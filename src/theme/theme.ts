@@ -1,6 +1,10 @@
-import { DefaultTheme } from 'styled-components';
+import { DefaultTheme } from 'styled-components'
 
 const theme: DefaultTheme = {
+  radius: {
+    small: '.4rem',
+    normal: '1.2rem'
+  },
   colors: {
     black: {
       700: 'hsl(0, 0%, 15%)'
@@ -18,6 +22,6 @@ const theme: DefaultTheme = {
       600: 'hsl(210, 14%, 95%)'
     }
   }
-};
+}
 
-export { theme };
+export { theme }

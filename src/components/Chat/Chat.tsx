@@ -1,32 +1,24 @@
 import React from 'react'
+import styled from 'styled-components'
 import useChat from '../../hooks/useChat'
-import { useForm } from 'react-hook-form'
 import ChatBubbles from '../molecules/ChatBubbles'
+import ChatForm from './ChatForm/ChatForm'
 
-type Inputs = {
-  message: string
-}
+const ChatStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 const Chat: React.FC = () => {
-  const { handleSubmit, register, reset } = useForm<Inputs>()
   const { messages, sendMessage } = useChat('test')
 
   return (
-    <>
+    <ChatStyled>
       <h1>Chat</h1>
       <ChatBubbles messages={messages} />
-      <form
-        onSubmit={handleSubmit((data: Inputs) => {
-          sendMessage(data.message)
-          reset({
-            message: ''
-          })
-        })}
-      >
-        <input type="text" name="message" ref={register} required />
-        <button type="submit">Send</button>
-      </form>
-    </>
+      <ChatForm sendMessage={sendMessage} />
+    </ChatStyled>
   )
 }
 
