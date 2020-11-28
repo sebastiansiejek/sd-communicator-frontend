@@ -1,11 +1,17 @@
-import React from 'react'
 import Chat from './components/Chat/Chat'
+import React from 'react'
+import { ThemeProvider } from 'styled-components'
+import { theme } from './theme/theme'
+import GlobalStyles from './theme/GlobalStyles'
 
 function App() {
   return (
-    <div className='App'>
-      <Chat />
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <div className="App">
+        <Chat />
+      </div>
+    </ThemeProvider>
   )
 }
 
