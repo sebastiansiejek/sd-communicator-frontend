@@ -26,11 +26,14 @@ const ChatBubbles: React.FC<Props> = ({ messages }) => {
     <>
       {messages.length > 0 && (
         <ChatBubblesStyles>
-          {messages.map(({ body, ownedByCurrentUser }, key) => (
-            <ChatBubble key={body + key} isSender={ownedByCurrentUser}>
-              {body}
-            </ChatBubble>
-          ))}
+          {messages.map(
+            ({ body, ownedByCurrentUser }, key) =>
+              body && (
+                <ChatBubble key={body + key} isSender={ownedByCurrentUser}>
+                  {body}
+                </ChatBubble>
+              )
+          )}
         </ChatBubblesStyles>
       )}
     </>

@@ -14,6 +14,11 @@ const useChat = (roomId: string) => {
       }
     )
 
+    if (roomId)
+      socketRef.current.emit('msgToServer', {
+        senderId: socketRef.current.id
+      })
+
     socketRef.current.on('msgToClient', (message: IMessage) => {
       const incomingMessage = {
         ...message,
