@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ChatBubbles from './ChatBubbles'
 import ChatForm from './ChatSendMessageForm'
+import ChatRoom from 'components/Chat/ChatRoom'
 
 const ChatStyled = styled.div`
   display: flex;
@@ -15,6 +16,7 @@ const Chat: React.FC = () => {
 
   return (
     <ChatStyled>
+      <ChatRoom />
       <ChatBubbles messages={messages} />
       <ChatForm sendMessage={sendMessage} />
     </ChatStyled>
