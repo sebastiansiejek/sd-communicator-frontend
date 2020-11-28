@@ -1,3 +1,4 @@
+import ButtonStyled from 'components/atoms/Button/Button'
 import Input from 'components/atoms/Input'
 import React from 'react'
 import { useForm } from 'react-hook-form'
@@ -40,7 +41,7 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
             placeholder="Room id"
             required
           />
-          <button type="submit">Join/create</button>
+          <ButtonStyled type="submit">Join/create</ButtonStyled>
         </ChatRoomFormStyled>
       )}
       {roomId && (
