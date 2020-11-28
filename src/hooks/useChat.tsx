@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import socketIOClient from 'socket.io-client'
-import { IMessage, IMessages } from '../types/types'
+import { IMessage, IMessages } from 'types/types'
 
 const useChat = (roomId: string) => {
   const [messages, setMessage] = useState<IMessages>([])

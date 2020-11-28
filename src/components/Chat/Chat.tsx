@@ -1,8 +1,8 @@
+import useChat from 'hooks/useChat'
 import React from 'react'
 import styled from 'styled-components'
-import useChat from '../../hooks/useChat'
 import ChatBubbles from './ChatBubbles'
-import ChatForm from './ChatForm/ChatForm'
+import ChatForm from './ChatForm'
 
 const ChatStyled = styled.div`
   display: flex;
