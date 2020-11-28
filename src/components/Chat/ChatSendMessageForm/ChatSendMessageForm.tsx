@@ -10,7 +10,7 @@ type IProps = {
   sendMessage: (arg0: string) => void
 }
 
-const ChatFormStyled = styled.form`
+const ChatSendMessageFormStyled = styled.form`
   display: flex;
   margin-top: 1.6rem;
 
@@ -39,11 +39,11 @@ const ChatFormStyled = styled.form`
   }
 `
 
-const ChatForm: React.FC<IProps> = ({ sendMessage }) => {
+const ChatSendMessageForm: React.FC<IProps> = ({ sendMessage }) => {
   const { handleSubmit, register, reset } = useForm<IInputs>()
 
   return (
-    <ChatFormStyled
+    <ChatSendMessageFormStyled
       onSubmit={handleSubmit((data: IInputs) => {
         sendMessage(data.message)
         reset({
@@ -53,8 +53,8 @@ const ChatForm: React.FC<IProps> = ({ sendMessage }) => {
     >
       <textarea name="message" ref={register} required />
       <button type="submit">SEND</button>
-    </ChatFormStyled>
+    </ChatSendMessageFormStyled>
   )
 }
 
-export default ChatForm
+export default ChatSendMessageForm

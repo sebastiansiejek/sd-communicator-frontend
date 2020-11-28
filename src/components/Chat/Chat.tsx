@@ -2,7 +2,7 @@ import useChat from 'hooks/useChat'
 import React from 'react'
 import styled from 'styled-components'
 import ChatBubbles from './ChatBubbles'
-import ChatForm from './ChatForm'
+import ChatForm from './ChatSendMessageForm'
 
 const ChatStyled = styled.div`
   display: flex;
@@ -15,7 +15,6 @@ const Chat: React.FC = () => {
 
   return (
     <ChatStyled>
-      <h1>Chat</h1>
       <ChatBubbles messages={messages} />
       <ChatForm sendMessage={sendMessage} />
     </ChatStyled>
