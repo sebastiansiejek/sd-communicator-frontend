@@ -6,13 +6,16 @@ import { ThemeProvider } from 'styled-components'
 import { theme } from './theme/theme'
 import store from 'store/store'
 import ChatRoom from 'components/Chat/ChatRoom'
+import Main from 'components/templates/Main/Main'
 
 const App = () => (
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <ChatRoom />
-      <Chat />
+      <Main>
+        <ChatRoom />
+        <Chat />
+      </Main>
     </ThemeProvider>
   </Provider>
 )
