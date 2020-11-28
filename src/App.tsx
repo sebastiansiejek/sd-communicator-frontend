@@ -1,14 +1,18 @@
 import Chat from './components/Chat/Chat'
 import GlobalStyles from './theme/GlobalStyles'
 import React from 'react'
+import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './theme/theme'
+import store from 'store/store'
 
 const App = () => (
-  <ThemeProvider theme={theme}>
-    <GlobalStyles />
-    <Chat />
-  </ThemeProvider>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Chat />
+    </ThemeProvider>
+  </Provider>
 )
 
 export default App
