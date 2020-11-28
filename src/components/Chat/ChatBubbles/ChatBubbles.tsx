@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { IMessages } from '../../../types/types'
-import ChatBubble from '../../atoms/ChatBubble'
+import ChatBubble from '../ChatBubble'
 
 interface Props {
   messages: IMessages

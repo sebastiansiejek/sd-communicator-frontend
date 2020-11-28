@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import useChat from '../../hooks/useChat'
-import ChatBubbles from '../molecules/ChatBubbles'
+import ChatBubbles from './ChatBubbles'
 import ChatForm from './ChatForm/ChatForm'
 
 const ChatStyled = styled.div`

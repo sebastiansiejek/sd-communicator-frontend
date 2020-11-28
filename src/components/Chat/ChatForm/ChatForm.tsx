@@ -25,7 +25,6 @@ const ChatFormStyled = styled.form`
     cursor: pointer;
     transition: background 0.3s, color 0.3s;
     border: 1px solid ${({ theme }) => theme.colors.black[700]};
-    outline: none;
     box-shadow: none;
     background: ${({ theme }) => theme.colors.white[600]};
     color: ${({ theme }) => theme.colors.black[700]};
