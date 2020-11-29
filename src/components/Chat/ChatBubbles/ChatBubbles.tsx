@@ -15,6 +15,8 @@ const ChatBubblesStyles = styled.div`
   padding: 1rem;
   background: ${({ theme }) => theme.colors.black[700]};
   border-radius: ${({ theme }) => theme.radius.small};
+  max-height: 80%;
+  overflow-y: auto;
 
   > *:not(:last-child) {
     margin-bottom: 0.8rem;
