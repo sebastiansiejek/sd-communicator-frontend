@@ -1,3 +1,4 @@
+import Input from 'components/atoms/Input'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
@@ -51,7 +52,7 @@ const ChatSendMessageForm: React.FC<IProps> = ({ sendMessage }) => {
         })
       })}
     >
-      <textarea name="message" ref={register} required />
+      <Input name="message" ref={register} required />
       <button type="submit">SEND</button>
     </ChatSendMessageFormStyled>
   )
