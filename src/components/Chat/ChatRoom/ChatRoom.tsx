@@ -75,7 +75,7 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
       {roomId && (
         <p>
           Your room id: <strong>{roomId}</strong>{' '}
-          <button onClick={() => copy(getInputValue)}>copy</button>
+          <button onClick={() => copy(window.location.href)}>copy link</button>
         </p>
       )}
     </>
