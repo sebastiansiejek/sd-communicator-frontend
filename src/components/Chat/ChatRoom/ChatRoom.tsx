@@ -3,6 +3,7 @@ import Input from 'components/atoms/Input'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import queryString from 'query-string'
+import copy from 'copy-to-clipboard'
 import { IStore } from 'store/store'
 import { nanoid } from 'nanoid'
 import { setRoomId } from 'store/slices/userSlice'
@@ -66,7 +67,8 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
       )}
       {roomId && (
         <p>
-          Your room id: <strong>{roomId}</strong>
+          Your room id: <strong>{roomId}</strong>{' '}
+          <button onClick={() => copy(getInputValue)}>copy</button>
         </p>
       )}
     </>

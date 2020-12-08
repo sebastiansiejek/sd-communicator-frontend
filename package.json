@@ -14,6 +14,7 @@
     "@types/react-redux": "^7.1.11",
     "@types/socket.io-client": "^1.4.34",
     "@types/styled-components": "^5.1.4",
+    "copy-to-clipboard": "^3.3.1",
     "nanoid": "^3.1.18",
     "query-string": "^6.13.7",
     "react": "^17.0.1",
