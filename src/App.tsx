@@ -7,6 +7,8 @@ import { theme } from './theme/theme'
 import store from 'store/store'
 import ChatRoom from 'components/Chat/ChatRoom'
 import Main from 'components/templates/Main/Main'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => (
   <Provider store={store}>
@@ -16,6 +18,7 @@ const App = () => (
         <ChatRoom />
         <Chat />
       </Main>
+      <ToastContainer />
     </ThemeProvider>
   </Provider>
 )

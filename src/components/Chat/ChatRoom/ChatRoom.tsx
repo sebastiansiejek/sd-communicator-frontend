@@ -1,12 +1,15 @@
 import ButtonStyled from 'components/atoms/Button/Button'
 import Input from 'components/atoms/Input'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import queryString from 'query-string'
+import copy from 'copy-to-clipboard'
 import { IStore } from 'store/store'
 import { nanoid } from 'nanoid'
 import { setRoomId } from 'store/slices/userSlice'
 import { useDispatch, connect } from 'react-redux'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 interface Props {
   roomId?: string
@@ -22,8 +25,13 @@ const ChatRoomFormStyled = styled.form`
 
 const ChatRoom: React.FC<Props> = ({ roomId }) => {
   const { handleSubmit, register, reset } = useForm()
-  const [generatedId, setGeneratedId] = useState('')
+  const [getInputValue, setInputValue] = useState('')
   const dispatch = useDispatch()
+  const roomIdFromGet = queryString.parse(window.location.search)?.roomId
+
+  useEffect(() => {
+    roomIdFromGet && setInputValue(`${roomIdFromGet}`)
+  }, [roomIdFromGet])
 
   return (
     <>
@@ -32,6 +40,13 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
           <ChatRoomFormStyled
             onSubmit={handleSubmit(({ room_id }: IInputs) => {
               dispatch(setRoomId(room_id))
+              window.history.replaceState(
+                null,
+                'null',
+                `${queryString.stringify({
+                  roomId: room_id
+                })}`
+              )
               reset({
                 room_id: ''
               })
@@ -42,7 +57,8 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
               type="text"
               ref={register}
               placeholder="Room id"
-              defaultValue={generatedId}
+              value={getInputValue}
+              onChange={(e) => setInputValue(e.target.value)}
               required
             />
             <ButtonStyled type="submit">Join/create</ButtonStyled>
@@ -51,9 +67,7 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
             style={{
               marginTop: '.8rem'
             }}
-            onClick={() => {
-              setGeneratedId(nanoid())
-            }}
+            onClick={() => setInputValue(nanoid())}
           >
             Generate unique room id
           </ButtonStyled>
@@ -61,7 +75,15 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
       )}
       {roomId && (
         <p>
-          Your room id: <strong>{roomId}</strong>
+          Your room id: <strong>{roomId}</strong>{' '}
+          <button
+            onClick={() => {
+              copy(window.location.href)
+              toast.success('Coped URL to clipboard')
+            }}
+          >
+            copy link
+          </button>
         </p>
       )}
     </>
