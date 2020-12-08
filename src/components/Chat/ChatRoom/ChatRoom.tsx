@@ -39,6 +39,13 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
           <ChatRoomFormStyled
             onSubmit={handleSubmit(({ room_id }: IInputs) => {
               dispatch(setRoomId(room_id))
+              window.history.replaceState(
+                null,
+                'null',
+                `${queryString.stringify({
+                  roomId: room_id
+                })}`
+              )
               reset({
                 room_id: ''
               })
