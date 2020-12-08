@@ -9,6 +9,7 @@ import { nanoid } from 'nanoid'
 import { setRoomId } from 'store/slices/userSlice'
 import { useDispatch, connect } from 'react-redux'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 interface Props {
   roomId?: string
@@ -75,7 +76,14 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
       {roomId && (
         <p>
           Your room id: <strong>{roomId}</strong>{' '}
-          <button onClick={() => copy(window.location.href)}>copy link</button>
+          <button
+            onClick={() => {
+              copy(window.location.href)
+              toast.success('Coped URL to clipboard')
+            }}
+          >
+            copy link
+          </button>
         </p>
       )}
     </>
