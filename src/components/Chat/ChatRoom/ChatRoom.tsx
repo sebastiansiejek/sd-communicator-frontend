@@ -1,7 +1,8 @@
 import ButtonStyled from 'components/atoms/Button/Button'
 import Input from 'components/atoms/Input'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import queryString from 'query-string'
 import { IStore } from 'store/store'
 import { nanoid } from 'nanoid'
 import { setRoomId } from 'store/slices/userSlice'
@@ -22,8 +23,13 @@ const ChatRoomFormStyled = styled.form`
 
 const ChatRoom: React.FC<Props> = ({ roomId }) => {
   const { handleSubmit, register, reset } = useForm()
-  const [generatedId, setGeneratedId] = useState('')
+  const [getInputValue, setInputValue] = useState('')
   const dispatch = useDispatch()
+  const roomIdFromGet = queryString.parse(window.location.search)?.roomId
+
+  useEffect(() => {
+    roomIdFromGet && setInputValue(`${roomIdFromGet}`)
+  }, [roomIdFromGet])
 
   return (
     <>
@@ -42,7 +48,8 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
               type="text"
               ref={register}
               placeholder="Room id"
-              defaultValue={generatedId}
+              value={getInputValue}
+              onChange={(e) => setInputValue(e.target.value)}
               required
             />
             <ButtonStyled type="submit">Join/create</ButtonStyled>
@@ -51,9 +58,7 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
             style={{
               marginTop: '.8rem'
             }}
-            onClick={() => {
-              setGeneratedId(nanoid())
-            }}
+            onClick={() => setInputValue(nanoid())}
           >
             Generate unique room id
           </ButtonStyled>
