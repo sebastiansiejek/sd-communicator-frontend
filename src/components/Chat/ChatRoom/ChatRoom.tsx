@@ -43,7 +43,7 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
               window.history.replaceState(
                 null,
                 'null',
-                `${queryString.stringify({
+                `?${queryString.stringify({
                   roomId: room_id
                 })}`
               )
