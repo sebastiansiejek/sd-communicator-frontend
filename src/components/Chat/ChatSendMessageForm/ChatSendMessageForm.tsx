@@ -14,27 +14,31 @@ type IProps = {
 const ChatSendMessageFormStyled = styled.form`
   display: flex;
   margin-top: 1.6rem;
+  width: 100%;
+  height:4rem;
 
-  textarea {
-    resize: none;
-    padding: 1.2rem;
-    border-radius: ${({ theme }) => theme.radius.normal};
-    border: 1px solid ${({ theme }) => theme.colors.black[700]};
+  Input {
+    width:100%;
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(16, 27, 79, 0.15);
+    border: none;
   }
 
   button {
     cursor: pointer;
     transition: background 0.3s, color 0.3s;
-    border: 1px solid ${({ theme }) => theme.colors.black[700]};
-    box-shadow: none;
-    background: ${({ theme }) => theme.colors.white[600]};
+    border: none;
     color: ${({ theme }) => theme.colors.black[700]};
     font-weight: bold;
     margin-left: 0.8rem;
-    border-radius: 100%;
+    background: #4D68C1;
+    box-shadow: 0px 5px 15px rgba(16, 27, 79, 0.15);
+    border-radius: 10px;
+    width:10rem;
 
     &:hover {
-      background: ${({ theme }) => theme.colors.black[700]};
+      background: #1FCA74;
       color: ${({ theme }) => theme.colors.white[600]};
     }
   }
