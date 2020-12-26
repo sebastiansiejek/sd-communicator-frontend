@@ -23,6 +23,9 @@ declare module 'styled-components' {
       white: {
         600: string
       }
+      green: {
+        500: string
+      }
     }
   }
 }

@@ -74,17 +74,17 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
         </>
       )}
       {roomId && (
-        <p>
-          Your room id: <strong>{roomId}</strong>{' '}
-          <button
+        <div>
+          Your room id: <strong id="room-id">{roomId}</strong>
+          <ButtonStyled
             onClick={() => {
               copy(window.location.href)
               toast.success('Coped URL to clipboard')
             }}
           >
-            copy link
-          </button>
-        </p>
+            COPY LINK
+          </ButtonStyled>
+        </div>
       )}
     </>
   )
