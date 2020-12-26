@@ -14,18 +14,16 @@ const ChatBubbleStyled = styled.div<IProps>`
   ${({ isSender }) =>
     isSender &&
     css`
-      background-color: ${({ theme }) => theme.colors.gray[500]};
+      background: ${({ theme }) => theme.colors.gray[500]};
       align-self: flex-end;
       text-align: right;
-      background: #788998;
       border-radius: 20px 0px 20px 20px;
     `}
 
   ${({ isSender }) =>
     !isSender &&
     css`
-      background-color: ${({ theme }) => theme.colors.yellow[500]};
-      background: #32D884;
+      background: ${({ theme }) => theme.colors.green[500]};
       border-radius: 0px 20px 20px 20px;
     `}
 `

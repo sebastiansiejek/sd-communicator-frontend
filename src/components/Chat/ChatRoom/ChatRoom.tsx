@@ -21,35 +21,6 @@ interface IInputs {
 
 const ChatRoomFormStyled = styled.form`
   display: flex;
-
-  input {
-    width: 100%;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(16, 27, 79, 0.15);
-    border: none;
-  }
-
-  button {
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s;
-    border: none;
-    color: ${({ theme }) => theme.colors.black[700]};
-    font-weight: bold;
-    margin-left: 0.8rem;
-    background: #4d68c1;
-    box-shadow: 0px 5px 15px rgba(16, 27, 79, 0.15);
-    border-radius: 10px;
-    width: 15rem;
-
-    &:hover {
-      background: #1fca74;
-      color: ${({ theme }) => theme.colors.white[600]};
-    }
-  }
-  p {
-    height: 100rem;
-  }
 `
 
 const ChatRoom: React.FC<Props> = ({ roomId }) => {
@@ -103,20 +74,17 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
         </>
       )}
       {roomId && (
-        <p id="chat-header">
+        <div>
           Your room id: <strong id="room-id">{roomId}</strong>
-          {''}
-          <div id="copy-link">
-            <button
-              onClick={() => {
-                copy(window.location.href)
-                toast.success('Coped URL to clipboard')
-              }}
-            >
-              COPY LINK
-            </button>
-          </div>
-        </p>
+          <ButtonStyled
+            onClick={() => {
+              copy(window.location.href)
+              toast.success('Coped URL to clipboard')
+            }}
+          >
+            COPY LINK
+          </ButtonStyled>
+        </div>
       )}
     </>
   )
