@@ -10,16 +10,12 @@ interface Props {
 const ChatBubblesStyles = styled.div`
   display: flex;
   flex-direction: column;
-  height: 382.5px;
-  width: 926px;
-  left: 155px;
-  top: 258px;
-
+  height: 38rem;
   padding: 1rem;
   background: ${({ theme }) => theme.colors.white[600]};
   border-radius: ${({ theme }) => theme.radius.small};
-  max-height: 80%;
   overflow-y: auto;
+  width: 100%;
 
   > *:not(:last-child) {
     margin-bottom: 0.8rem;

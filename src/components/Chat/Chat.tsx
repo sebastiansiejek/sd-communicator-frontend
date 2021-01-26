@@ -10,7 +10,9 @@ const ChatStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 190%;
+  width: 100%;
+  max-width: 96.8rem;
+  margin-top: 2rem;
 `
 
 interface IProps {
