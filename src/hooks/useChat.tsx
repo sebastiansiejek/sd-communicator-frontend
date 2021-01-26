@@ -1,6 +1,7 @@
-import { useEffect, useState, useRef } from 'react'
+import WebNotification from 'inc/WebNotification'
 import socketIOClient from 'socket.io-client'
 import { IMessage, IMessages } from 'types/types'
+import { useEffect, useState, useRef } from 'react'
 
 const useChat = (roomId: string) => {
   const [messages, setMessage] = useState<IMessages>([])
@@ -24,6 +25,13 @@ const useChat = (roomId: string) => {
         ...message,
         ownedByCurrentUser: message.senderId === socketRef.current.id
       }
+
+      if (!incomingMessage.ownedByCurrentUser && incomingMessage.body) {
+        new WebNotification({ displayIfDocummentIsHidden: true }).display(
+          `You receive new message in "${roomId}" room`
+        )
+      }
+
       setMessage((messages) => [...messages, incomingMessage])
     })
 
