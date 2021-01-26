@@ -4,6 +4,10 @@
 
 1. You should create `.env` file and set `REACT_APP_SOCKETIO_SERVER_URL` variable.
 
+## Functionalities
+
+* Displaying browser notification about new message if tab with chat is not active
+
 ## Available Scripts
 
 In the project directory, you can run:
