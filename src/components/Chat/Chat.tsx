@@ -5,6 +5,7 @@ import ChatBubbles from './ChatBubbles'
 import ChatForm from './ChatSendMessageForm'
 import { connect } from 'react-redux'
 import { IStore } from 'store/store'
+import ChatRoom from './ChatRoom'
 
 const ChatStyled = styled.div`
   display: flex;
@@ -12,7 +13,6 @@ const ChatStyled = styled.div`
   align-items: center;
   width: 100%;
   max-width: 96.8rem;
-  margin-top: 2rem;
 `
 
 interface IProps {
@@ -20,10 +20,11 @@ interface IProps {
 }
 
 const Chat: React.FC<IProps> = ({ roomId }) => {
-  const { messages, sendMessage } = useChat(roomId)
+  const { messages, sendMessage, leaveRoom } = useChat(roomId)
 
   return (
     <ChatStyled>
+      <ChatRoom leaveRoom={leaveRoom} />
       {roomId && (
         <>
           <ChatBubbles messages={messages} />

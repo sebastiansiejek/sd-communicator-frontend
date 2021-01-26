@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-const ButtonStyled = styled.button`
+const ButtonStyled = styled.button<{ themeType?: 'danger' }>`
   padding: 1.2rem 1.6rem;
   cursor: pointer;
   transition: background 0.3s, color 0.3s;
@@ -12,8 +12,15 @@ const ButtonStyled = styled.button`
   box-shadow: 0px 5px 15px rgba(16, 27, 79, 0.15);
   border-radius: 10px;
 
+  ${({ themeType }) =>
+    themeType === 'danger' &&
+    css`
+      background: ${({ theme }) => theme.colors.red[500]};
+    `}
+
   &:hover {
-    background: #1fca74;
+    background: ${({ theme, themeType }) =>
+      themeType === 'danger' ? theme.colors.red[600] : '#1fca74'};
     color: ${({ theme }) => theme.colors.white[600]};
   }
 `

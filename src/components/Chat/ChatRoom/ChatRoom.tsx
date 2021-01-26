@@ -13,6 +13,7 @@ import { toast } from 'react-toastify'
 
 interface Props {
   roomId?: string
+  leaveRoom: () => void
 }
 
 interface IInputs {
@@ -23,7 +24,7 @@ const ChatRoomFormStyled = styled.form`
   display: flex;
 `
 
-const ChatRoom: React.FC<Props> = ({ roomId }) => {
+const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom }) => {
   const { handleSubmit, register, reset } = useForm()
   const [getInputValue, setInputValue] = useState('')
   const dispatch = useDispatch()
@@ -34,7 +35,7 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
   }, [roomIdFromGet])
 
   return (
-    <>
+    <div style={{ marginBottom: '2rem' }}>
       {!roomId && (
         <>
           <ChatRoomFormStyled
@@ -84,9 +85,18 @@ const ChatRoom: React.FC<Props> = ({ roomId }) => {
           >
             COPY LINK
           </ButtonStyled>
+          <ButtonStyled
+            themeType="danger"
+            onClick={() => {
+              leaveRoom()
+              dispatch(setRoomId(''))
+            }}
+          >
+            leave room
+          </ButtonStyled>
         </div>
       )}
-    </>
+    </div>
   )
 }
 

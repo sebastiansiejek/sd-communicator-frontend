@@ -47,7 +47,14 @@ const useChat = (roomId: string) => {
     })
   }
 
-  return { messages, sendMessage }
+  const leaveRoom = () => {
+    socketRef.current.emit('msgToServer', {
+      leaveMessage: true,
+      senderId: socketRef.current.id
+    })
+  }
+
+  return { messages, sendMessage, leaveRoom }
 }
 
 export default useChat

@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './theme/theme'
 import store from 'store/store'
-import ChatRoom from 'components/Chat/ChatRoom'
 import Main from 'components/templates/Main/Main'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -16,7 +15,6 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Main>
-          <ChatRoom />
           <Chat />
         </Main>
         <ToastContainer />
