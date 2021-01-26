@@ -10,17 +10,19 @@ import Main from 'components/templates/Main/Main'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const App = () => (
-  <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Main>
-        <ChatRoom />
-        <Chat />
-      </Main>
-      <ToastContainer />
-    </ThemeProvider>
-  </Provider>
-)
+const App = () => {
+  return (
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Main>
+          <ChatRoom />
+          <Chat />
+        </Main>
+        <ToastContainer />
+      </ThemeProvider>
+    </Provider>
+  )
+}
 
 export default App
