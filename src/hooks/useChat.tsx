@@ -2,6 +2,7 @@ import WebNotification from 'inc/WebNotification'
 import socketIOClient from 'socket.io-client'
 import { IMessage, IMessages } from 'types/types'
 import { useEffect, useState, useRef } from 'react'
+import { toast } from 'react-toastify'
 
 const useChat = (roomId: string) => {
   const [messages, setMessage] = useState<IMessages>([])
@@ -13,27 +14,30 @@ const useChat = (roomId: string) => {
       {
         query: { roomId }
       }
-    )
+    ).on('connect_error', () => {
+      toast.error('ERROR: Server is down')
+    })
 
-    if (roomId)
+    if (roomId) {
       socketRef.current.emit('msgToServer', {
         senderId: socketRef.current.id
       })
 
-    socketRef.current.on('msgToClient', (message: IMessage) => {
-      const incomingMessage = {
-        ...message,
-        ownedByCurrentUser: message.senderId === socketRef.current.id
-      }
+      socketRef.current.on('msgToClient', (message: IMessage) => {
+        const incomingMessage = {
+          ...message,
+          ownedByCurrentUser: message.senderId === socketRef.current.id
+        }
 
-      if (!incomingMessage.ownedByCurrentUser && incomingMessage.body) {
-        new WebNotification({ displayIfDocummentIsHidden: true }).display(
-          `You receive new message in "${roomId}" room`
-        )
-      }
+        if (!incomingMessage.ownedByCurrentUser && incomingMessage.body) {
+          new WebNotification({ displayIfDocummentIsHidden: true }).display(
+            `You receive new message in "${roomId}" room`
+          )
+        }
 
-      setMessage((messages) => [...messages, incomingMessage])
-    })
+        setMessage((messages) => [...messages, incomingMessage])
+      })
+    }
 
     return () => {
       socketRef.current.disconnect()

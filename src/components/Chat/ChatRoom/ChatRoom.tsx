@@ -20,6 +20,12 @@ interface IInputs {
   room_id: string
 }
 
+const ChatRoomStyled = styled.div`
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+`
+
 const ChatRoomFormStyled = styled.form`
   display: flex;
 `
@@ -35,7 +41,7 @@ const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom }) => {
   }, [roomIdFromGet])
 
   return (
-    <div style={{ marginBottom: '2rem' }}>
+    <ChatRoomStyled>
       {!roomId && (
         <>
           <ChatRoomFormStyled
@@ -96,7 +102,7 @@ const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom }) => {
           </ButtonStyled>
         </div>
       )}
-    </div>
+    </ChatRoomStyled>
   )
 }
 
