@@ -52,11 +52,7 @@ const useChat = (roomId: string) => {
   }
 
   const leaveRoom = () => {
-    socketRef.current.emit('msgToServer', {
-      body: '',
-      leaveRoom: true,
-      senderId: socketRef.current.id
-    })
+    socketRef.current.emit('leaveRoom')
   }
 
   return { messages, sendMessage, leaveRoom }
