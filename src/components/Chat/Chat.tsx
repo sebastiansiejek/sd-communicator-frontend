@@ -17,15 +17,16 @@ const ChatStyled = styled.div`
 
 interface IProps {
   roomId: string
+  userName: string
 }
 
-const Chat: React.FC<IProps> = ({ roomId }) => {
+const Chat: React.FC<IProps> = ({ roomId, userName }) => {
   const { messages, sendMessage, leaveRoom } = useChat(roomId)
 
   return (
     <ChatStyled>
       <ChatRoom leaveRoom={leaveRoom} />
-      {roomId && (
+      {roomId && userName && (
         <>
           <ChatBubbles messages={messages} />
           <ChatForm sendMessage={sendMessage} />
@@ -37,6 +38,7 @@ const Chat: React.FC<IProps> = ({ roomId }) => {
 
 export default connect((state: IStore) => {
   return {
-    roomId: state.user.roomId
+    roomId: state.user.roomId,
+    userName: state.user.userName
   }
 })(Chat)

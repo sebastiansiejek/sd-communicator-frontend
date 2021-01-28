@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const initialState = {
-  roomId: ''
+  roomId: '',
+  userName: ''
 }
 
 const slice = createSlice({
@@ -10,10 +11,13 @@ const slice = createSlice({
   reducers: {
     setRoomId: (state, action) => {
       state.roomId = action.payload
+    },
+    setUserName: (state, action) => {
+      state.userName = action.payload
     }
   }
 })
 
-export const { setRoomId } = slice.actions
+export const { setRoomId, setUserName } = slice.actions
 
 export default slice.reducer

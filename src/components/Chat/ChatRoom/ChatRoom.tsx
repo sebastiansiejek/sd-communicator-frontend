@@ -6,7 +6,7 @@ import queryString from 'query-string'
 import copy from 'copy-to-clipboard'
 import { IStore } from 'store/store'
 import { nanoid } from 'nanoid'
-import { setRoomId } from 'store/slices/userSlice'
+import { setRoomId, setUserName } from 'store/slices/userSlice'
 import { useDispatch, connect } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -18,6 +18,7 @@ interface Props {
 
 interface IInputs {
   room_id: string
+  user_name: string
 }
 
 const ChatRoomStyled = styled.div`
@@ -27,7 +28,8 @@ const ChatRoomStyled = styled.div`
 `
 
 const ChatRoomFormStyled = styled.form`
-  display: flex;
+  display: grid;
+  grid-gap: 1.5rem;
 `
 
 const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom }) => {
@@ -45,8 +47,9 @@ const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom }) => {
       {!roomId && (
         <>
           <ChatRoomFormStyled
-            onSubmit={handleSubmit(({ room_id }: IInputs) => {
+            onSubmit={handleSubmit(({ room_id, user_name }: IInputs) => {
               dispatch(setRoomId(room_id))
+              dispatch(setUserName(user_name))
               window.history.replaceState(
                 null,
                 'null',
@@ -55,31 +58,41 @@ const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom }) => {
                 })}`
               )
               reset({
-                room_id: ''
+                room_id: '',
+                user_name: ''
               })
             })}
           >
             <Input
-              name="room_id"
-              type="text"
+              placeholder="Your name"
+              name="user_name"
               ref={register}
-              placeholder="Room id"
-              value={getInputValue}
-              onChange={(e) => setInputValue(e.target.value)}
               required
             />
-            <ButtonStyled type="submit" style={{ marginLeft: '1rem' }}>
-              Join/create
+            <div style={{ display: 'flex' }}>
+              <Input
+                name="room_id"
+                type="text"
+                ref={register}
+                placeholder="Room id"
+                value={getInputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                required
+              />
+              <ButtonStyled
+                style={{
+                  marginLeft: '1rem'
+                }}
+                type="button"
+                onClick={() => setInputValue(nanoid())}
+              >
+                generate
+              </ButtonStyled>
+            </div>
+            <ButtonStyled type="submit" style={{ marginTop: '1rem' }}>
+              join/create
             </ButtonStyled>
           </ChatRoomFormStyled>
-          <ButtonStyled
-            style={{
-              marginTop: '.8rem'
-            }}
-            onClick={() => setInputValue(nanoid())}
-          >
-            Generate unique room id
-          </ButtonStyled>
         </>
       )}
       {roomId && (
