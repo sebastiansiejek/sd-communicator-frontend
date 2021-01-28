@@ -1,4 +1,4 @@
-import { createSlice, Dispatch } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 export const initialState = {
   roomId: ''
@@ -14,14 +14,6 @@ const slice = createSlice({
   }
 })
 
-export const setRoomId = (payload: string) => async (dispatch: Dispatch) => {
-  const { setRoomId } = slice.actions
-
-  try {
-    dispatch(setRoomId(payload))
-  } catch (e) {
-    return console.error(e)
-  }
-}
+export const { setRoomId } = slice.actions
 
 export default slice.reducer
