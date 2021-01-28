@@ -4,7 +4,7 @@ import { IMessage, IMessages } from 'types/types'
 import { useEffect, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
 
-const useChat = (roomId: string, userName: string) => {
+const useChat = (roomId: string, nickname: string) => {
   const [messages, setMessage] = useState<IMessages>([])
   const socketRef = useRef<any>()
 
@@ -47,7 +47,7 @@ const useChat = (roomId: string, userName: string) => {
   const sendMessage = (message: string) => {
     socketRef.current.emit('msgToServer', {
       body: message,
-      userName: userName,
+      nickname: nickname,
       senderId: socketRef.current.id
     })
   }

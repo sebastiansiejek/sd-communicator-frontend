@@ -1,6 +1,6 @@
 export type IMessage = {
   body: string
-  userName: string
+  nickname: string
   senderId: string
   ownedByCurrentUser: boolean
 }

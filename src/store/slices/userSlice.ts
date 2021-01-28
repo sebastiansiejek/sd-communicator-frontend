@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const initialState = {
   roomId: '',
-  userName: ''
+  nickname: ''
 }
 
 const slice = createSlice({
@@ -13,7 +13,7 @@ const slice = createSlice({
       state.roomId = action.payload
     },
     setUserName: (state, action) => {
-      state.userName = action.payload
+      state.nickname = action.payload
     }
   }
 })

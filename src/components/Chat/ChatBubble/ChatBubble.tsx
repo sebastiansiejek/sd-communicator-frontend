@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 type IProps = {
   body: string
-  userName: string
+  nickname: string
   isSender: boolean
 }
 
@@ -50,12 +50,12 @@ const ChatBubbleStyled = styled.div<IProps>`
     `}
 `
 
-const ChatBubble: React.FC<IProps> = ({ body, userName, isSender }) => {
+const ChatBubble: React.FC<IProps> = ({ body, nickname, isSender }) => {
   return (
-    <ChatGroupStyled body={body} userName={userName} isSender={isSender}>
+    <ChatGroupStyled body={body} nickname={nickname} isSender={isSender}>
       <div>
-        {!isSender && <UserNameStyled>{userName}</UserNameStyled>}
-        <ChatBubbleStyled body={body} userName={userName} isSender={isSender}>
+        {!isSender && <UserNameStyled>{nickname}</UserNameStyled>}
+        <ChatBubbleStyled body={body} nickname={nickname} isSender={isSender}>
           {body}
         </ChatBubbleStyled>
       </div>

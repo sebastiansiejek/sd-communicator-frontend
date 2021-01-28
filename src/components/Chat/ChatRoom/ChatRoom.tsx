@@ -13,7 +13,7 @@ import { toast } from 'react-toastify'
 
 interface Props {
   roomId: string
-  userName: string
+  nickname: string
   leaveRoom: () => void
 }
 
@@ -33,7 +33,7 @@ const ChatRoomFormStyled = styled.form`
   grid-gap: 1.5rem;
 `
 
-const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom, userName }) => {
+const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom, nickname }) => {
   const { handleSubmit, register, reset } = useForm()
   const [getInputValue, setInputValue] = useState('')
   const dispatch = useDispatch()
@@ -65,7 +65,7 @@ const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom, userName }) => {
             })}
           >
             <Input
-              placeholder="Your name"
+              placeholder="Nickname"
               name="user_name"
               ref={register}
               required
@@ -104,7 +104,7 @@ const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom, userName }) => {
                 <tr>
                   <td>Your nickname:</td>
                   <td>
-                    <strong>{userName}</strong>
+                    <strong>{nickname}</strong>
                   </td>
                 </tr>
                 <tr>
@@ -145,6 +145,6 @@ const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom, userName }) => {
 export default connect((state: IStore) => {
   return {
     roomId: state.user.roomId,
-    userName: state.user.userName
+    nickname: state.user.nickname
   }
 })(ChatRoom)
