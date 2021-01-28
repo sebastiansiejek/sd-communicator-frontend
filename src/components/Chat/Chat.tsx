@@ -21,7 +21,7 @@ interface IProps {
 }
 
 const Chat: React.FC<IProps> = ({ roomId, userName }) => {
-  const { messages, sendMessage, leaveRoom } = useChat(roomId)
+  const { messages, sendMessage, leaveRoom } = useChat(roomId, userName)
 
   return (
     <ChatStyled>

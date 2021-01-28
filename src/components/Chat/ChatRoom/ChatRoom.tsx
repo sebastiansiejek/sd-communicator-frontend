@@ -12,7 +12,8 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 interface Props {
-  roomId?: string
+  roomId: string
+  userName: string
   leaveRoom: () => void
 }
 
@@ -32,7 +33,7 @@ const ChatRoomFormStyled = styled.form`
   grid-gap: 1.5rem;
 `
 
-const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom }) => {
+const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom, userName }) => {
   const { handleSubmit, register, reset } = useForm()
   const [getInputValue, setInputValue] = useState('')
   const dispatch = useDispatch()
@@ -97,26 +98,44 @@ const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom }) => {
       )}
       {roomId && (
         <div>
-          Your room id: <strong id="room-id">{roomId}</strong>
-          <ButtonStyled
-            style={{ marginLeft: '1rem' }}
-            onClick={() => {
-              copy(window.location.href)
-              toast.success('Coped URL to clipboard')
-            }}
-          >
-            COPY LINK
-          </ButtonStyled>
-          <ButtonStyled
-            style={{ marginLeft: '1.5rem' }}
-            themeType="danger"
-            onClick={() => {
-              leaveRoom()
-              dispatch(setRoomId(''))
-            }}
-          >
-            leave room
-          </ButtonStyled>
+          <div style={{ marginBottom: '1rem' }}>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Your nickname:</td>
+                  <td>
+                    <strong>{userName}</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Your room id:</td>
+                  <td>
+                    <strong id="room-id">{roomId}</strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <ButtonStyled
+              onClick={() => {
+                copy(window.location.href)
+                toast.success('Coped URL to clipboard')
+              }}
+            >
+              COPY LINK
+            </ButtonStyled>
+            <ButtonStyled
+              style={{ marginLeft: '1.5rem' }}
+              themeType="danger"
+              onClick={() => {
+                leaveRoom()
+                dispatch(setRoomId(''))
+              }}
+            >
+              leave room
+            </ButtonStyled>
+          </div>
         </div>
       )}
     </ChatRoomStyled>
@@ -125,6 +144,7 @@ const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom }) => {
 
 export default connect((state: IStore) => {
   return {
-    roomId: state.user.roomId
+    roomId: state.user.roomId,
+    userName: state.user.userName
   }
 })(ChatRoom)
