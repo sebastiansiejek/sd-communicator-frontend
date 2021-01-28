@@ -32,7 +32,9 @@ const ChatSendMessageForm: React.FC<IProps> = ({ sendMessage }) => {
       })}
     >
       <Input name="message" ref={register} required />
-      <Button type="submit">SEND</Button>
+      <Button type="submit" style={{ marginLeft: '1rem' }}>
+        SEND
+      </Button>
     </ChatSendMessageFormStyled>
   )
 }

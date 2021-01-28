@@ -68,7 +68,9 @@ const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom }) => {
               onChange={(e) => setInputValue(e.target.value)}
               required
             />
-            <ButtonStyled type="submit">Join/create</ButtonStyled>
+            <ButtonStyled type="submit" style={{ marginLeft: '1rem' }}>
+              Join/create
+            </ButtonStyled>
           </ChatRoomFormStyled>
           <ButtonStyled
             style={{
@@ -84,6 +86,7 @@ const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom }) => {
         <div>
           Your room id: <strong id="room-id">{roomId}</strong>
           <ButtonStyled
+            style={{ marginLeft: '1rem' }}
             onClick={() => {
               copy(window.location.href)
               toast.success('Coped URL to clipboard')
@@ -92,6 +95,7 @@ const ChatRoom: React.FC<Props> = ({ roomId, leaveRoom }) => {
             COPY LINK
           </ButtonStyled>
           <ButtonStyled
+            style={{ marginLeft: '1.5rem' }}
             themeType="danger"
             onClick={() => {
               leaveRoom()
