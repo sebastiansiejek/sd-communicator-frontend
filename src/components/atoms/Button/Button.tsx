@@ -10,6 +10,7 @@ const ButtonStyled = styled.button<{ themeType?: 'danger' }>`
   background: #4d68c1;
   box-shadow: 0px 5px 15px rgba(16, 27, 79, 0.15);
   border-radius: 10px;
+  text-transform: uppercase;
 
   ${({ themeType }) =>
     themeType === 'danger' &&
