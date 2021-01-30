@@ -43,6 +43,10 @@ const useChat = (roomId: string, nickname: string) => {
       socketRef.current.on('joinToRoom', (response: { message: string }) => {
         toast.success(response.message)
       })
+
+      socketRef.current.on('leaveRoom', (response: { message: string }) => {
+        toast.error(response.message)
+      })
     }
 
     return () => {
@@ -69,10 +73,13 @@ const useChat = (roomId: string, nickname: string) => {
   }
 
   const leaveRoom = () => {
-    socketRef.current.emit('leaveRoom')
+    socketRef.current.emit('leaveRoom', {
+      nickname,
+      senderId: socketRef.current.id
+    })
   }
 
-  return { messages, sendMessage, leaveRoom }
+  return { messages, sendMessage, leaveRoom, joinToRoom }
 }
 
 export default useChat
