@@ -30,6 +30,7 @@ const UserNameStyled = styled.div`
 const ChatBubbleStyled = styled.div<IProps>`
   padding: 1rem 1.2rem;
   width: max-content;
+  max-width: 100%;
 
   ${({ isSender }) =>
     isSender &&
