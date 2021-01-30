@@ -9,16 +9,18 @@ const useChat = (roomId: string, nickname: string) => {
   const socketRef = useRef<any>()
 
   useEffect(() => {
-    socketRef.current = socketIOClient(
-      process.env.REACT_APP_SOCKETIO_SERVER_URL,
-      {
-        query: { roomId }
-      }
-    ).on('connect_error', () => {
-      toast.error('ERROR: Server is down')
-    })
-
     if (roomId) {
+      socketRef.current = socketIOClient(
+        process.env.REACT_APP_SOCKETIO_SERVER_URL,
+        {
+          query: { roomId }
+        }
+      ).on('connect_error', () => {
+        toast.error('ERROR: Server is down')
+      })
+
+      joinToRoom(nickname)
+
       socketRef.current.emit('msgToServer', {
         senderId: socketRef.current.id
       })
@@ -37,12 +39,23 @@ const useChat = (roomId: string, nickname: string) => {
 
         setMessage((messages) => [...messages, incomingMessage])
       })
+
+      socketRef.current.on('joinToRoom', (response: { message: string }) => {
+        toast.success(response.message)
+      })
+
+      socketRef.current.on('leaveRoom', (response: { message: string }) => {
+        toast.error(response.message)
+      })
     }
 
     return () => {
-      socketRef.current.disconnect()
+      if (roomId) {
+        socketRef.current.disconnect()
+        leaveRoom()
+      }
     }
-  }, [roomId])
+  }, [roomId, nickname])
 
   const sendMessage = (message: string) => {
     socketRef.current.emit('msgToServer', {
@@ -52,11 +65,21 @@ const useChat = (roomId: string, nickname: string) => {
     })
   }
 
-  const leaveRoom = () => {
-    socketRef.current.emit('leaveRoom')
+  const joinToRoom = (nickname: string) => {
+    socketRef.current.emit('joinToRoom', {
+      nickname,
+      senderId: socketRef.current.id
+    })
   }
 
-  return { messages, sendMessage, leaveRoom }
+  const leaveRoom = () => {
+    socketRef.current.emit('leaveRoom', {
+      nickname,
+      senderId: socketRef.current.id
+    })
+  }
+
+  return { messages, sendMessage, leaveRoom, joinToRoom }
 }
 
 export default useChat
