@@ -12,9 +12,15 @@ const ChatGroupStyled = styled.div<IProps>`
   flex-direction: column;
 
   ${({ isSender }) =>
-    !isSender &&
+    isSender &&
     css`
       align-items: flex-end;
+    `}
+
+  ${({ isSender }) =>
+    !isSender &&
+    css`
+      align-items: flex-start;
     `}
 `
 
@@ -29,14 +35,12 @@ const UserNameStyled = styled.div`
 
 const ChatBubbleStyled = styled.div<IProps>`
   padding: 1rem 1.2rem;
-  width: max-content;
   max-width: 100%;
 
   ${({ isSender }) =>
     isSender &&
     css`
       background: ${({ theme }) => theme.colors.gray[500]};
-      text-align: right;
       border-radius: 20px 0px 20px 20px;
     `}
 
