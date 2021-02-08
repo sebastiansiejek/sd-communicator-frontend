@@ -4,6 +4,11 @@
 
 1. You should create `.env` file and set `REACT_APP_SOCKETIO_SERVER_URL` variable.
 
+## Demo
+
+https://sd-communicator-frontend.vercel.app <br>
+You probably should wait a few second for start server.
+
 ## Functionalities
 
 * Displaying browser notification about new message if tab with chat is not active
