@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { toast } from 'react-toastify'
 import { IStore } from 'store/store'
 import styled from 'styled-components'
-import ActionBar from './ActionBar'
+import VideoControl from './VideoControl'
 
 interface IVideo {
   isMuted: boolean
@@ -46,7 +46,7 @@ const Video: React.FC<IVideo> = ({ isMuted }) => {
   return (
     <StyledVideoContainer>
       <video ref={videoRef} />
-      <ActionBar />
+      <VideoControl />
     </StyledVideoContainer>
   )
 }

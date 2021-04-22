@@ -11,7 +11,7 @@ const StyledVideoBar = styled.div`
   transform: translateX(-50%);
 `
 
-const ActionBar: React.FC = () => {
+const VideoControl: React.FC = () => {
   return (
     <StyledVideoBar>
       <Microphone />
@@ -19,4 +19,4 @@ const ActionBar: React.FC = () => {
   )
 }
 
-export default ActionBar
+export default VideoControl
