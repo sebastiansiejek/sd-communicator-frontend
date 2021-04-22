@@ -1,18 +1,24 @@
-import useChat from 'hooks/useChat'
-import React from 'react'
-import styled from 'styled-components'
 import ChatBubbles from './ChatBubbles'
 import ChatForm from './ChatSendMessageForm'
-import { connect } from 'react-redux'
-import { IStore } from 'store/store'
+import React from 'react'
 import RoomDetails from '../RoomDetails'
+import Video from 'components/Video'
+import styled from 'styled-components'
+import useChat from 'hooks/useChat'
+import { IStore } from 'store/store'
+import { connect } from 'react-redux'
 
-const ChatStyled = styled.div`
+const StyledMessageChat = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  max-width: 96.8rem;
+  width: 30%;
+  padding: 2rem;
+`
+
+const StyledVideoChat = styled.div`
+  width: 70%;
+  border: 2px solid lightgray;
 `
 
 interface IProps {
@@ -24,15 +30,20 @@ const Chat: React.FC<IProps> = ({ roomId, nickname }) => {
   const { messages, sendMessage, leaveRoom } = useChat(roomId, nickname)
 
   return (
-    <ChatStyled>
-      <RoomDetails leaveRoom={leaveRoom} />
+    <>
       {roomId && nickname && (
         <>
-          <ChatBubbles messages={messages} />
-          <ChatForm sendMessage={sendMessage} />
+          <StyledVideoChat>
+            <Video />
+          </StyledVideoChat>
+          <StyledMessageChat>
+            <RoomDetails leaveRoom={leaveRoom} />
+            <ChatBubbles messages={messages} />
+            <ChatForm sendMessage={sendMessage} />
+          </StyledMessageChat>
         </>
       )}
-    </ChatStyled>
+    </>
   )
 }
 
