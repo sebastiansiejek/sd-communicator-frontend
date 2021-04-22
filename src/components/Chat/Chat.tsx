@@ -5,7 +5,7 @@ import ChatBubbles from './ChatBubbles'
 import ChatForm from './ChatSendMessageForm'
 import { connect } from 'react-redux'
 import { IStore } from 'store/store'
-import ChatRoom from './ChatRoom'
+import RoomDetails from '../RoomDetails'
 
 const ChatStyled = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const Chat: React.FC<IProps> = ({ roomId, nickname }) => {
 
   return (
     <ChatStyled>
-      <ChatRoom leaveRoom={leaveRoom} />
+      <RoomDetails leaveRoom={leaveRoom} />
       {roomId && nickname && (
         <>
           <ChatBubbles messages={messages} />
