@@ -11,6 +11,10 @@ const StyledVideoBar = styled.div`
   left: 50%;
   transform: translateX(-50%);
   display: flex;
+
+  > * {
+    margin: 0.6rem;
+  }
 `
 
 const VideoControl: React.FC = () => {
