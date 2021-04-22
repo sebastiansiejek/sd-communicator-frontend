@@ -1,10 +1,17 @@
 import React, { useEffect, createRef } from 'react'
+import { connect } from 'react-redux'
 import { toast } from 'react-toastify'
+import { IStore } from 'store/store'
 import styled from 'styled-components'
+import ActionBar from './ActionBar'
 
-const VideoStyled = styled.video``
+interface IVideo {
+  isMuted: boolean
+}
 
-const Video: React.FC = () => {
+const StyledVideoContainer = styled.div``
+
+const Video: React.FC<IVideo> = ({ isMuted }) => {
   const videoRef = createRef<HTMLVideoElement>()
 
   useEffect(() => {
@@ -20,7 +27,13 @@ const Video: React.FC = () => {
         if (videoRef.current) {
           videoRef.current.srcObject = stream
           videoRef.current.onloadedmetadata = function (e) {
-            videoRef.current?.play()
+            const { current } = videoRef
+            if (current) {
+              current.play()
+
+              if (isMuted) current.muted = true
+              if (!isMuted) current.muted = false
+            }
           }
         }
       })
@@ -30,7 +43,16 @@ const Video: React.FC = () => {
       })
   })
 
-  return <VideoStyled ref={videoRef} />
+  return (
+    <StyledVideoContainer>
+      <video ref={videoRef} />
+      <ActionBar />
+    </StyledVideoContainer>
+  )
 }
 
-export default Video
+export default connect((state: IStore) => {
+  return {
+    isMuted: state.video.muted
+  }
+})(Video)
