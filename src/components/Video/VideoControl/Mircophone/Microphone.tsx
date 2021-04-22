@@ -14,9 +14,15 @@ const Microphone: React.FC<IMicrophone> = ({ isMuted }) => {
   return (
     <>
       {isMuted ? (
-        <BiMicrophoneOff onClick={() => dispatch(setMute(false))} />
+        <BiMicrophoneOff
+          onClick={() => dispatch(setMute(false))}
+          cursor="pointer"
+        />
       ) : (
-        <BiMicrophone onClick={() => dispatch(setMute(true))} />
+        <BiMicrophone
+          onClick={() => dispatch(setMute(true))}
+          cursor="pointer"
+        />
       )}
     </>
   )
