@@ -7,11 +7,12 @@ import VideoControl from './VideoControl'
 
 interface IVideo {
   isMuted: boolean
+  isPlay: boolean
 }
 
 const StyledVideoContainer = styled.div``
 
-const Video: React.FC<IVideo> = ({ isMuted }) => {
+const Video: React.FC<IVideo> = ({ isMuted, isPlay }) => {
   const videoRef = createRef<HTMLVideoElement>()
 
   useEffect(() => {
@@ -29,7 +30,8 @@ const Video: React.FC<IVideo> = ({ isMuted }) => {
           videoRef.current.onloadedmetadata = function (e) {
             const { current } = videoRef
             if (current) {
-              current.play()
+              if (isPlay) current.play()
+              if (!isPlay) current.pause()
 
               if (isMuted) current.muted = true
               if (!isMuted) current.muted = false
@@ -53,6 +55,7 @@ const Video: React.FC<IVideo> = ({ isMuted }) => {
 
 export default connect((state: IStore) => {
   return {
-    isMuted: state.video.muted
+    isMuted: state.video.muted,
+    isPlay: state.video.play
   }
 })(Video)
