@@ -1,5 +1,6 @@
 import ChatBubbles from './ChatBubbles'
 import ChatForm from './ChatSendMessageForm'
+import JoinToRoom from 'components/JoinToRoom'
 import React from 'react'
 import RoomDetails from '../RoomDetails'
 import Video from 'components/Video'
@@ -25,6 +26,18 @@ const StyledVideoChat = styled.div`
   background: #000;
 `
 
+const StyledJoinToRoom = styled.div`
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+`
+
+const StyledChatContent = styled.div`
+  display: flex;
+  height: 100vh;
+`
 interface IProps {
   roomId: string
   nickname: string
@@ -35,9 +48,13 @@ const Chat: React.FC<IProps> = ({ roomId, nickname }) => {
 
   return (
     <>
-      {!roomId && !nickname && <RoomDetails leaveRoom={leaveRoom} />}
+      {!roomId && (
+        <StyledJoinToRoom>
+          <JoinToRoom />
+        </StyledJoinToRoom>
+      )}
       {roomId && nickname && (
-        <>
+        <StyledChatContent>
           <StyledVideoChat>
             <Video />
           </StyledVideoChat>
@@ -46,7 +63,7 @@ const Chat: React.FC<IProps> = ({ roomId, nickname }) => {
             <ChatBubbles messages={messages} />
             <ChatForm sendMessage={sendMessage} />
           </StyledMessageChat>
-        </>
+        </StyledChatContent>
       )}
     </>
   )
