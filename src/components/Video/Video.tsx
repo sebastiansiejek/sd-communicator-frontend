@@ -27,6 +27,7 @@ const Video: React.FC<IVideo> = ({ isMuted, isPlay }) => {
       .then((stream) => {
         if (videoRef.current) {
           videoRef.current.srcObject = stream
+
           videoRef.current.onloadedmetadata = function (e) {
             const { current } = videoRef
             if (current) {
