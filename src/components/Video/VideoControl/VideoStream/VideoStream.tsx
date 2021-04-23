@@ -14,9 +14,9 @@ const VideoStream: React.FC<IVideoStream> = ({ isPlay }) => {
   return (
     <>
       {isPlay ? (
-        <BiVideoOff onClick={() => dispatch(setPlay(false))} cursor="pointer" />
+        <BiVideo onClick={() => dispatch(setPlay(false))} cursor="pointer" />
       ) : (
-        <BiVideo onClick={() => dispatch(setPlay(true))} cursor="pointer" />
+        <BiVideoOff onClick={() => dispatch(setPlay(true))} cursor="pointer" />
       )}
     </>
   )
