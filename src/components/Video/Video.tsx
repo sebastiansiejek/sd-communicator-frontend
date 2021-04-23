@@ -28,11 +28,13 @@ const Video: React.FC<IVideo> = ({ isMuted, isPlay }) => {
         if (videoRef.current) {
           videoRef.current.srcObject = stream
 
-          videoRef.current.onloadedmetadata = function (e) {
+          videoRef.current.onloadedmetadata = function () {
             const { current } = videoRef
             if (current) {
-              if (isPlay) current.play()
-              if (!isPlay) current.pause()
+              current.play()
+
+              if (!isPlay)
+                stream.getVideoTracks().forEach((video) => video.stop())
 
               if (isMuted) current.muted = true
               if (!isMuted) current.muted = false
