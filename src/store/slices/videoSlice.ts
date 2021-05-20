@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const initialState = {
-  muted: false,
+  muted: true,
   play: true
 }
 

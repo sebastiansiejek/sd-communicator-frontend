@@ -20,9 +20,6 @@ const StyledMessageChat = styled.div`
 const StyledVideoChat = styled.div`
   position: relative;
   width: 70%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: #000;
 `
 
@@ -44,7 +41,7 @@ interface IProps {
 }
 
 const Chat: React.FC<IProps> = ({ roomId, nickname }) => {
-  const { messages, sendMessage, leaveRoom } = useChat(roomId, nickname)
+  const { messages, sendMessage, leaveRoom, socket } = useChat(roomId, nickname)
 
   return (
     <>
@@ -56,7 +53,7 @@ const Chat: React.FC<IProps> = ({ roomId, nickname }) => {
       {roomId && nickname && (
         <StyledChatContent>
           <StyledVideoChat>
-            <Video />
+            <Video socket={socket} />
           </StyledVideoChat>
           <StyledMessageChat>
             <RoomDetails leaveRoom={leaveRoom} />
