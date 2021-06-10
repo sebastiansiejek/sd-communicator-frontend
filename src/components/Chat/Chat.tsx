@@ -1,38 +1,68 @@
-import useChat from 'hooks/useChat'
-import React from 'react'
-import styled from 'styled-components'
 import ChatBubbles from './ChatBubbles'
 import ChatForm from './ChatSendMessageForm'
-import { connect } from 'react-redux'
+import JoinToRoom from 'components/JoinToRoom'
+import React from 'react'
+import RoomDetails from '../RoomDetails'
+import Video from 'components/Video'
+import styled from 'styled-components'
+import useChat from 'hooks/useChat'
 import { IStore } from 'store/store'
-import ChatRoom from './ChatRoom'
+import { connect } from 'react-redux'
 
-const ChatStyled = styled.div`
+const StyledMessageChat = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  max-width: 96.8rem;
+  width: 30%;
+  padding: 2rem;
 `
 
+const StyledVideoChat = styled.div`
+  position: relative;
+  width: 70%;
+  background: #000;
+`
+
+const StyledJoinToRoom = styled.div`
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+`
+
+const StyledChatContent = styled.div`
+  display: flex;
+  height: 100vh;
+`
 interface IProps {
   roomId: string
   nickname: string
 }
 
 const Chat: React.FC<IProps> = ({ roomId, nickname }) => {
-  const { messages, sendMessage, leaveRoom } = useChat(roomId, nickname)
+  const { messages, sendMessage, leaveRoom, socket } = useChat(roomId, nickname)
 
   return (
-    <ChatStyled>
-      <ChatRoom leaveRoom={leaveRoom} />
-      {roomId && nickname && (
-        <>
-          <ChatBubbles messages={messages} />
-          <ChatForm sendMessage={sendMessage} />
-        </>
+    <>
+      {!roomId && (
+        <StyledJoinToRoom>
+          <JoinToRoom />
+        </StyledJoinToRoom>
       )}
-    </ChatStyled>
+      {roomId && nickname && (
+        <StyledChatContent>
+          <StyledVideoChat>
+            <Video socket={socket} />
+          </StyledVideoChat>
+          <StyledMessageChat>
+            <RoomDetails leaveRoom={leaveRoom} />
+            <ChatBubbles messages={messages} />
+            <ChatForm sendMessage={sendMessage} />
+          </StyledMessageChat>
+        </StyledChatContent>
+      )}
+    </>
   )
 }
 

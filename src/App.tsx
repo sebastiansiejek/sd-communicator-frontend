@@ -1,13 +1,13 @@
+import 'react-toastify/dist/ReactToastify.css'
 import Chat from './components/Chat/Chat'
 import GlobalStyles from './theme/GlobalStyles'
+import Main from 'components/templates/Main/Main'
 import React from 'react'
+import store from 'store/store'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
-import { theme } from './theme/theme'
-import store from 'store/store'
-import Main from 'components/templates/Main/Main'
 import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { theme } from './theme/theme'
 
 const App = () => {
   return (

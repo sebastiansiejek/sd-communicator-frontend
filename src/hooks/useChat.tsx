@@ -3,6 +3,7 @@ import socketIOClient from 'socket.io-client'
 import { IMessage, IMessages } from 'types/types'
 import { useEffect, useState, useRef } from 'react'
 import { toast } from 'react-toastify'
+import SimplePeer from 'simple-peer'
 
 const useChat = (roomId: string, nickname: string) => {
   const [messages, setMessage] = useState<IMessages>([])
@@ -40,10 +41,6 @@ const useChat = (roomId: string, nickname: string) => {
         setMessage((messages) => [...messages, incomingMessage])
       })
 
-      socketRef.current.on('joinToRoom', (response: { message: string }) => {
-        toast.success(response.message)
-      })
-
       socketRef.current.on('leaveRoom', (response: { message: string }) => {
         toast.error(response.message)
       })
@@ -55,7 +52,7 @@ const useChat = (roomId: string, nickname: string) => {
         leaveRoom()
       }
     }
-  }, [roomId, nickname])
+  }, [roomId])
 
   const sendMessage = (message: string) => {
     socketRef.current.emit('msgToServer', {
@@ -79,7 +76,13 @@ const useChat = (roomId: string, nickname: string) => {
     })
   }
 
-  return { messages, sendMessage, leaveRoom, joinToRoom }
+  return {
+    messages,
+    sendMessage,
+    leaveRoom,
+    joinToRoom,
+    socket: socketRef.current
+  }
 }
 
 export default useChat
